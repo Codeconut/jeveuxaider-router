@@ -9,6 +9,18 @@ server {
     server_name backend;
     listen <%= ENV['PORT'] %>;
 
+    <% if ENV['HTTP_USER'] && ENV['HTTP_PASSWORD'] %>
+      <%
+        File.write('/app/.pass', ENV['HTTP_PASSWORD'])
+        pass = `openssl passwd -in /app/.pass`
+        File.unlink('/app/.pass')
+        File.write('/app/.htpasswd', "#{ENV['HTTP_USER']}:#{pass}\n")
+      %>
+
+      auth_basic           "Protected Site";
+      auth_basic_user_file "/app/.htpasswd";
+    <% end %>
+
     charset utf-8;
     set $backend "<%= ENV['BACKEND_URL']%>";
 
