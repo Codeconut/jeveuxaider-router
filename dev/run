@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BIN_RUN_PID=-1
+function restart() {
+  echo "Killing $BIN_RUN_PID"
+  kill -SIGTERM $BIN_RUN_PID 2>/dev/null
+}
+
+trap restart SIGTERM
+
+cp -rf /work/* /app/
+/app/bin/run &
+BIN_RUN_PID=$!
+# While the PID is running
+while kill -0 $BIN_RUN_PID 2>/dev/null ; do
+  sleep 1
+done
+# Cleanup
+ps aux | grep nginx | grep master | tr -s ' ' | cut -d' ' -f2 | xargs kill -SIGTERM 2>/dev/null
+sleep 1

@@ -1,0 +1,4 @@
+# vi: filetype=nginx
+location / {
+  proxy_pass <%= ENV['BACKEND_URL'] %>;
+}
