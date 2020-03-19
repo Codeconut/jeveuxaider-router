@@ -1,0 +1,16 @@
+# vi: filetype=nginx
+
+limit_req_zone $server_name zone=api:30m rate=500r/s;
+limit_req_zone $server_name zone=admin:30m rate=50r/s;
+limit_req_zone $http_x_forwarded_for zone=perip:100m rate=10r/s;
+limit_req_log_level error;
+
+server {
+    server_name backend;
+    listen <%= ENV['PORT'] %>;
+
+    charset utf-8;
+    set $backend "<%= ENV['BACKEND_URL']%>";
+
+    include /app/main.conf;
+}
