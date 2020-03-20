@@ -16,9 +16,9 @@ server {
         File.unlink('/app/.pass')
         File.write('/app/.htpasswd', "#{ENV['HTTP_USER']}:#{pass}\n")
       %>
-
-      auth_basic           "Protected Site";
-      auth_basic_user_file "/app/.htpasswd";
+      set $auth "Protected Website";
+    <% else %>
+      set $auth "off";
     <% end %>
 
     charset utf-8;

@@ -5,8 +5,8 @@ services:
     volumes:
       - ./:/work
     environment:
-      - PORT=8080
-      - BACKEND_URL=https://reserve-civique-preprod.osc-secnum-fr1.scalingo.io
+      PORT: 8080
+      BACKEND_URL: "https://reserve-civique-preprod.osc-secnum-fr1.scalingo.io"
     command: rerun --verbose --dir /work --signal TERM --background -- /work/dev/run
     ports:
       - 8080:8080
