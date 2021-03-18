@@ -6,6 +6,8 @@ services:
       - ./:/work
     environment:
       PORT: 8080
+      FRONT_URL: "https://reserve-civique-preprod-front.osc-secnum-fr1.scalingo.io"
+      BACK_URL: "https://reserve-civique-preprod-back.osc-secnum-fr1.scalingo.io"
       APP_HOST: covid19.172.17.0.1.xip.st-sc.fr
     command: rerun --verbose --dir /work --signal TERM --background -- /work/dev/run
     ports:
