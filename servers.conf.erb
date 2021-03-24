@@ -1,11 +1,8 @@
 # vi: filetype=nginx
 
-limit_req_zone $server_name zone=api:30m rate=5000r/m;
-limit_req_zone $server_name zone=admin:30m rate=5000r/m;
-limit_req_zone $http_x_forwarded_for zone=perip:100m rate=5000r/m;
-# limit_req_zone $server_name zone=api:30m rate=500r/s;
-# limit_req_zone $server_name zone=admin:30m rate=50r/s;
-# limit_req_zone $http_x_forwarded_for zone=perip:100m rate=10r/s;
+limit_req_zone $server_name zone=api:30m rate=500r/s;
+limit_req_zone $server_name zone=admin:30m rate=50r/s;
+limit_req_zone $http_x_forwarded_for zone=perip:100m rate=10r/s;
 limit_req_log_level error;
 
 map $proxy_add_x_forwarded_for $client_ip {"~(?<IP>([0-9]{1,3}\.){3}[0-9]{1,3}),.*" $IP;}
@@ -27,8 +24,7 @@ server {
     <% end %>
 
     charset utf-8;
-    set $frontend "<%= ENV['FRONT_URL']%>";
-    set $backend "<%= ENV['BACK_URL']%>";
+    set $backend "<%= ENV['BACKEND_URL']%>";
     set $app_host "<%= ENV['APP_HOST']%>";
 
     include /app/main.conf;
