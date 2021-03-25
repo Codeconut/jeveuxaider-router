@@ -25,6 +25,7 @@ server {
 
     charset utf-8;
     set $backend "<%= ENV['BACKEND_URL']%>";
+    set $frontend "<%= ENV['FRONTEND_URL']%>";
     set $app_host "<%= ENV['APP_HOST']%>";
 
     include /app/main.conf;
