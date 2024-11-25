@@ -27,6 +27,7 @@ server {
     set $backend "<%= ENV['BACKEND_URL']%>";
     set $frontend "<%= ENV['FRONTEND_URL']%>";
     set $app_host "<%= ENV['APP_HOST']%>";
+    set $forwarded_by "<%= ENV['FORWARDED_BY']%>";
 
     include /app/main.conf;
 }
