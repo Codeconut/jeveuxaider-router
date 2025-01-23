@@ -28,6 +28,7 @@ server {
     set $frontend "<%= ENV['FRONTEND_URL']%>";
     set $app_host "<%= ENV['APP_HOST']%>";
     set $forwarded_by "<%= ENV['FORWARDED_BY_PROXY']%>";
+    set $wordpress "<%= ENV['WORDPRESS_URL']%>";
 
     include /app/main.conf;
 }
